@@ -5,7 +5,7 @@ DefineClass._50BMG_HE = {
 
 
 	object_class = "Ammo",
-	ScrapParts = 5,
+	ScrapParts = 10,
 	Icon = "UI/Icons/Items/50bmg_he.png",
 	DisplayName = T(470141133007, --[[ModItemInventoryItemCompositeDef _50BMG_HE DisplayName]] ".50 Explosive"),
 	DisplayNamePlural = T(249148916468, --[[ModItemInventoryItemCompositeDef _50BMG_HE DisplayNamePlural]] ".50 Explosive"),
@@ -24,6 +24,6 @@ DefineClass._50BMG_HE = {
 			target_prop = "PenetrationClass",
 		}),
 	},
-	GunPowder = 2,
+	GunPowder = 1,
 }
 
