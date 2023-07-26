@@ -6,7 +6,7 @@ DefineClass._12gauge_Breacher = {
 
 	object_class = "Ammo",
 	ScrapParts = 10,
-	Icon = "UI/Icons/Items/12_gauge_bullets_breacher",
+	Icon = "UI/Icons/Items/12_gauge_bullets_breacher.png",
 	DisplayName = T(644616198480, --[[ModItemInventoryItemCompositeDef _12gauge_Breacher DisplayName]] "12-gauge Breacher"),
 	DisplayNamePlural = T(756176270226, --[[ModItemInventoryItemCompositeDef _12gauge_Breacher DisplayNamePlural]] "12-gauge Breacher"),
 	colorStyle = "AmmoAPColor",

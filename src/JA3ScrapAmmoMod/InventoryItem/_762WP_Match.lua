@@ -5,7 +5,6 @@ DefineClass._762WP_Match = {
 
 
 	object_class = "Ammo",
-	Repairable = false,
 	ScrapParts = 5,
 	Icon = "UI/Icons/Items/762_wp_bullets_match.png",
 	DisplayName = T(366194229820, --[[ModItemInventoryItemCompositeDef _762WP_Match DisplayName]] "7.62 mm WP Match"),

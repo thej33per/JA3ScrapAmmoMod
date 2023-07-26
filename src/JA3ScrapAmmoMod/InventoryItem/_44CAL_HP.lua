@@ -6,7 +6,7 @@ DefineClass._44CAL_HP = {
 
 	object_class = "Ammo",
 	ScrapParts = 5,
-	Icon = "UI/Icons/Items/44_cal_bullets_hollow_point",
+	Icon = "UI/Icons/Items/44_cal_bullets_hollow_point.png",
 	DisplayName = T(290851622821, --[[ModItemInventoryItemCompositeDef _44CAL_HP DisplayName]] ".44 Hollow Point"),
 	DisplayNamePlural = T(947009347102, --[[ModItemInventoryItemCompositeDef _44CAL_HP DisplayNamePlural]] ".44 Hollow Point"),
 	colorStyle = "AmmoHPColor",

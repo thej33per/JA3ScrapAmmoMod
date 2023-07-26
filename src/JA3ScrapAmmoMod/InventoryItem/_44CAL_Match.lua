@@ -6,7 +6,7 @@ DefineClass._44CAL_Match = {
 
 	object_class = "Ammo",
 	ScrapParts = 5,
-	Icon = "UI/Icons/Items/44_cal_bullets_match",
+	Icon = "UI/Icons/Items/44_cal_bullets_match.png",
 	DisplayName = T(935031543254, --[[ModItemInventoryItemCompositeDef _44CAL_Match DisplayName]] ".44 Match"),
 	DisplayNamePlural = T(729118661137, --[[ModItemInventoryItemCompositeDef _44CAL_Match DisplayNamePlural]] ".44 Match"),
 	colorStyle = "AmmoMatchColor",

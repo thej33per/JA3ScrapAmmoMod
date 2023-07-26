@@ -6,7 +6,7 @@ DefineClass._44CAL_AP = {
 
 	object_class = "Ammo",
 	ScrapParts = 10,
-	Icon = "UI/Icons/Items/44_cal_bullets_armor_piercing",
+	Icon = "UI/Icons/Items/44_cal_bullets_armor_piercing.png",
 	DisplayName = T(735499371090, --[[ModItemInventoryItemCompositeDef _44CAL_AP DisplayName]] ".44 Armor Piercing"),
 	DisplayNamePlural = T(877463400750, --[[ModItemInventoryItemCompositeDef _44CAL_AP DisplayNamePlural]] ".44 Armor Piercing"),
 	colorStyle = "AmmoAPColor",

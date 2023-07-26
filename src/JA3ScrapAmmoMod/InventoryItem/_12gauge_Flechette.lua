@@ -6,7 +6,7 @@ DefineClass._12gauge_Flechette = {
 
 	object_class = "Ammo",
 	ScrapParts = 5,
-	Icon = "UI/Icons/Items/12_gauge_bullets_flechette",
+	Icon = "UI/Icons/Items/12_gauge_bullets_flechette.png",
 	DisplayName = T(994311605449, --[[ModItemInventoryItemCompositeDef _12gauge_Flechette DisplayName]] "12-gauge Sabot"),
 	DisplayNamePlural = T(292882182138, --[[ModItemInventoryItemCompositeDef _12gauge_Flechette DisplayNamePlural]] "12-gauge Sabot"),
 	colorStyle = "AmmoMatchColor",

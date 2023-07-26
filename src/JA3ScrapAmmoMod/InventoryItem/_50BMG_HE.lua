@@ -24,6 +24,6 @@ DefineClass._50BMG_HE = {
 			target_prop = "PenetrationClass",
 		}),
 	},
-	GunPowder = 1,
+	GunPowder = 2,
 }
 

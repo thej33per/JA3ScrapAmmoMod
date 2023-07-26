@@ -6,7 +6,7 @@ DefineClass._12gauge_Saltshot = {
 
 	object_class = "Ammo",
 	ScrapParts = 5,
-	Icon = "UI/Icons/Items/12_gauge_bullets_saltshot",
+	Icon = "UI/Icons/Items/12_gauge_bullets_saltshot.png",
 	DisplayName = T(897306856548, --[[ModItemInventoryItemCompositeDef _12gauge_Saltshot DisplayName]] "12-gauge Saltshot"),
 	DisplayNamePlural = T(658376345970, --[[ModItemInventoryItemCompositeDef _12gauge_Saltshot DisplayNamePlural]] "12-gauge Saltshot"),
 	colorStyle = "AmmoTracerColor",

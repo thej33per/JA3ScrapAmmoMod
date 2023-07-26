@@ -5,7 +5,7 @@ DefineClass._50BMG_Basic = {
 
 
 	object_class = "Ammo",
-	ScrapParts = 10,
+	ScrapParts = 5,
 	Icon = "UI/Icons/Items/50bmg_basic.png",
 	DisplayName = T(430431749223, --[[ModItemInventoryItemCompositeDef _50BMG_Basic DisplayName]] ".50 Standard"),
 	DisplayNamePlural = T(842298872893, --[[ModItemInventoryItemCompositeDef _50BMG_Basic DisplayNamePlural]] ".50 Standard"),

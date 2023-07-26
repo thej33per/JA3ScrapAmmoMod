@@ -6,7 +6,7 @@ DefineClass._44CAL_Shock = {
 
 	object_class = "Ammo",
 	ScrapParts = 5,
-	Icon = "UI/Icons/Items/44_cal_bullets_shock",
+	Icon = "UI/Icons/Items/44_cal_bullets_shock.png",
 	DisplayName = T(671330851390, --[[ModItemInventoryItemCompositeDef _44CAL_Shock DisplayName]] ".44 Shock"),
 	DisplayNamePlural = T(136526955127, --[[ModItemInventoryItemCompositeDef _44CAL_Shock DisplayNamePlural]] ".44 Shock"),
 	colorStyle = "AmmoMatchColor",

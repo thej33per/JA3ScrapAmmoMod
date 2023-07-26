@@ -6,7 +6,7 @@ DefineClass._12gauge_Buckshot = {
 
 	object_class = "Ammo",
 	ScrapParts = 5,
-	Icon = "UI/Icons/Items/12_gauge_bullets_buckshot",
+	Icon = "UI/Icons/Items/12_gauge_bullets_buckshot.png",
 	DisplayName = T(817584556389, --[[ModItemInventoryItemCompositeDef _12gauge_Buckshot DisplayName]] "12-gauge Buckshot"),
 	DisplayNamePlural = T(452529018580, --[[ModItemInventoryItemCompositeDef _12gauge_Buckshot DisplayNamePlural]] "12-gauge Buckshot"),
 	colorStyle = "AmmoBasicColor",
