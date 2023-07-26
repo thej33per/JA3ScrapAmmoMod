@@ -56,7 +56,6 @@ DefineClass.AmmoProperties = {
             template = true,
             min = 0,
             max = 1000,
-            dont_save = true
         },
         {
             category = "Condition",
@@ -68,7 +67,6 @@ DefineClass.AmmoProperties = {
             template = true,
             min = 0,
             max = 1000,
-            dont_save = true
         }
     }
 }
