@@ -1,5 +1,6 @@
 function Ammo:AmountOfScrapPartsFromItem()
     local parts = Ammo.GetScrapParts(self)
-    local amountOfScrap =  MulDivTrunc(1, parts,  30)
+    local amount = self.Amount
+    local amountOfScrap =  MulDivTrunc(amount, parts,  30)
     return amountOfScrap
 end
