@@ -3,11 +3,13 @@ function ScrapItem(inventory, slot_name, item, squadBag, squadId)
     local additional
     print("_Inventory: ", inventory)
     print("_slot_name: ", slot_name)
-    print("item: ", item)
-    print("item: ", squadBag)
-    print("squadid", squadId)
-    if Inventory:IsEmpty then
-        
+    print("_item: ", item)
+    print("_squadBag: ", squadBag)
+    print("_squadid", squadId)
+    if inventory:IsEmpty("Inventory") then
+        print("Inventory is empty")
+        --todo create inventory object
+        --todo create squadBag object
     end
     
     if IsKindOf(item, "Firearm") then
@@ -35,7 +37,6 @@ function ScrapItem(inventory, slot_name, item, squadBag, squadId)
         local amountGunPowder = item:AmountGunPowderFromAmmo()
         local gunPowder = PlaceInventoryItem("BlackPowder")
         gunPowder.Amount = amountGunPowder
-        print("gunPowder-Object: ", gunPowder)
         inventory:AddItem("Inventory", gunPowder)
     end
     if item.ammo then
@@ -44,7 +45,6 @@ function ScrapItem(inventory, slot_name, item, squadBag, squadId)
     if 0 < partsAmount then
         local parts = PlaceInventoryItem("Parts")
         parts.Amount = partsAmount
-        print("scrapParts-Object: ", parts)
         squadBag:AddAndStackItem(parts)
     end
     local removedItem, pos = inventory:RemoveItem(slot_name, item)
