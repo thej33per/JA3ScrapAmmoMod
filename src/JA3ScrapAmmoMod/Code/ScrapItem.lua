@@ -48,8 +48,23 @@ function ScrapItem(inventory, slot_name, item, squadBag, squadId)
         parts.Amount = partsAmount
         squadBag:AddAndStackItem(parts)
     end
-    local removedItem, pos = inventory:RemoveItem(slot_name, item)
-    DoneObject(removedItem)
+    local scrapedAmmo = 30 * partsAmount
+    local remainingAmmoAmount = item.Amount - scrapedAmmo
+    if remainingAmmoAmount > 0 and IsKindOf(item, "Ammo") then
+        inventory:RemoveItem(item)
+        item.Amount = remainingAmmoAmount
+        if IsKindOf(inventory, "squadBag") then
+            inventory:AddAndStackItem(item)
+        else
+            local removedItem, pos = inventory:RemoveItem(slot_name, item)
+            DoneObject(removedItem)
+            inventory:AddItem(slot_name, item)
+        end
+    else
+        local removedItem, pos = inventory:RemoveItem(slot_name, item)
+        DoneObject(removedItem)
+    end
+
     if IsKindOf(inventory, "Unit") and slot_name == inventory.current_weapon and inventory:IsIdleCommand() then
         inventory:SetCommand("Idle")
     end
