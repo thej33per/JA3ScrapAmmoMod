@@ -5,7 +5,7 @@ return PlaceObj('ModDef', {
 	'content_path', "Mod/JA3ScrapAmmoMod/",
 	'author', "thej33per",
 	'version_minor', 1,
-	'version', 49,
+	'version', 50,
 	'lua_revision', 233360,
 	'saved_with_revision', 338408,
 	'code', {
@@ -14,6 +14,7 @@ return PlaceObj('ModDef', {
 		"Code/AmountScrapPartsFromAmmo.lua",
 		"Code/GetScrapParts.lua",
 		"Code/ScrapItem.lua",
+		"Code/GetInventoryObject.lua",
 		"InventoryItem/_12gauge_Breacher.lua",
 		"InventoryItem/_12gauge_Buckshot.lua",
 		"InventoryItem/_12gauge_Flechette.lua",
@@ -50,6 +51,6 @@ return PlaceObj('ModDef', {
 		"InventoryItem/_9mm_Subsonic.lua",
 		"InventoryItem/_9mm_Tracer.lua",
 	},
-	'saved', 1690405748,
-	'code_hash', -6365255121051049776,
+	'saved', 1690495653,
+	'code_hash', -3128983038789159495,
 })

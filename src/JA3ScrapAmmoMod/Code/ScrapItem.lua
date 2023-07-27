@@ -8,10 +8,11 @@ function ScrapItem(inventory, slot_name, item, squadBag, squadId)
     print("_squadid", squadId)
     if inventory:IsEmpty("Inventory") then
         print("Inventory is empty")
-        --todo create inventory object
-        --todo create squadBag object
+        inventory = GetFirstUnitInventoryFromSquad(squadId)
+        squadBag = GetSquadBagInventory(squadId)
+        print("Get new inventory from squadId: ", inventory)
+        print("Get new squadBag from squadId: ", squadBag)
     end
-    
     if IsKindOf(item, "Firearm") then
         additional = item:GetSpecialScrapItems()
     end

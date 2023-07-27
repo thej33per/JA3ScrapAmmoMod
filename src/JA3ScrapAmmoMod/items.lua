@@ -19,6 +19,10 @@ PlaceObj('ModItemCode', {
 	'name', "ScrapItem",
 	'CodeFileName', "Code/ScrapItem.lua",
 }),
+PlaceObj('ModItemCode', {
+	'name', "GetInventoryObject",
+	'CodeFileName', "Code/GetInventoryObject.lua",
+}),
 PlaceObj('ModItemInventoryItemCompositeDef', {
 	'Group', "Ammo",
 	'Id', "_12gauge_Breacher",
