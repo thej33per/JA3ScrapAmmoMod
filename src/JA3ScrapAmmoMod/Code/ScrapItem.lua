@@ -1,17 +1,10 @@
 function ScrapItem(inventory, slot_name, item, squadBag, squadId)
     local partsAmount = item:AmountOfScrapPartsFromItem()
     local additional
-    print("_Inventory: ", inventory)
-    print("_slot_name: ", slot_name)
-    print("_item: ", item)
-    print("_squadBag: ", squadBag)
-    print("_squadid", squadId)
     if inventory:IsEmpty("Inventory") then
-        print("Inventory is empty")
         inventory = GetFirstUnitWithInventorySpaceFromSquad(squadId, item)
         squadBag = GetSquadBagInventory(squadId)
         --print("firstUnitFromSquad: ", firstUnitFromSquad)
-        print("Get new squadBag from squadId: ", squadBag)
     end
     if IsKindOf(item, "Firearm") then
         additional = item:GetSpecialScrapItems()
@@ -50,8 +43,6 @@ function ScrapItem(inventory, slot_name, item, squadBag, squadId)
     if IsKindOf(item, "Ammo") then
         local scrapedAmmo = 30 * partsAmount / item:GetScrapParts()
         local remainingAmmoAmount = item.Amount - scrapedAmmo
-        print("scrapedAmmo: ", scrapedAmmo)
-        print("remainingAmmoAmount: ", remainingAmmoAmount)
         if remainingAmmoAmount > 0 then
             item.Amount = remainingAmmoAmount
             ObjModified(item)
