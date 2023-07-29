@@ -10,7 +10,7 @@ function ScrapItem(inventory, slot_name, item, squadBag, squadId)
         print("Inventory is empty")
         inventory = GetFirstUnitInventoryFromSquad(squadId)
         squadBag = GetSquadBagInventory(squadId)
-        print("Get new inventory from squadId: ", inventory)
+        --print("firstUnitFromSquad: ", firstUnitFromSquad)
         print("Get new squadBag from squadId: ", squadBag)
     end
     if IsKindOf(item, "Firearm") then
@@ -32,13 +32,12 @@ function ScrapItem(inventory, slot_name, item, squadBag, squadId)
                 item.Amount = res.amount
             end
             inventory:AddItem("Inventory", item)
-            print("Inventory: ", inventory)
         end
     elseif IsKindOf(item, "Ammo") then
         local amountGunPowder = item:AmountGunPowderFromAmmo()
         local gunPowder = PlaceInventoryItem("BlackPowder")
         gunPowder.Amount = amountGunPowder
-        inventory:AddItem("Inventory", gunPowder)
+        inventory:AddAndStackGunPowder(gunPowder)
     end
     if item.ammo then
         UnloadWeapon(item, squadBag)
@@ -48,23 +47,23 @@ function ScrapItem(inventory, slot_name, item, squadBag, squadId)
         parts.Amount = partsAmount
         squadBag:AddAndStackItem(parts)
     end
-    local scrapedAmmo = 30 * partsAmount
-    local remainingAmmoAmount = item.Amount - scrapedAmmo
-    if remainingAmmoAmount > 0 and IsKindOf(item, "Ammo") then
-        inventory:RemoveItem(item)
-        item.Amount = remainingAmmoAmount
-        if IsKindOf(inventory, "squadBag") then
-            inventory:AddAndStackItem(item)
+    if IsKindOf(item, "Ammo") then
+        local scrapedAmmo = 30 * partsAmount / item:GetScrapParts()
+        local remainingAmmoAmount = item.Amount - scrapedAmmo
+        print("scrapedAmmo: ", scrapedAmmo)
+        print("remainingAmmoAmount: ", remainingAmmoAmount)
+        if remainingAmmoAmount > 0 then
+            item.Amount = remainingAmmoAmount
+            ObjModified(item)
+            DoneObject(item)
         else
             local removedItem, pos = inventory:RemoveItem(slot_name, item)
             DoneObject(removedItem)
-            inventory:AddItem(slot_name, item)
         end
     else
         local removedItem, pos = inventory:RemoveItem(slot_name, item)
         DoneObject(removedItem)
     end
-
     if IsKindOf(inventory, "Unit") and slot_name == inventory.current_weapon and inventory:IsIdleCommand() then
         inventory:SetCommand("Idle")
     end
