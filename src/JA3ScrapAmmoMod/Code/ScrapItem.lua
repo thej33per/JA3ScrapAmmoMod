@@ -8,7 +8,7 @@ function ScrapItem(inventory, slot_name, item, squadBag, squadId)
     print("_squadid", squadId)
     if inventory:IsEmpty("Inventory") then
         print("Inventory is empty")
-        inventory = GetFirstUnitInventoryFromSquad(squadId)
+        inventory = GetFirstUnitWithInventorySpaceFromSquad(squadId, item)
         squadBag = GetSquadBagInventory(squadId)
         --print("firstUnitFromSquad: ", firstUnitFromSquad)
         print("Get new squadBag from squadId: ", squadBag)
