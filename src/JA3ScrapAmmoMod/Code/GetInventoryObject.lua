@@ -1,5 +1,10 @@
-function GetFirstUnitInventoryFromSquad(squadId)
+function GetFirstUnitWithInventorySpaceFromSquad(squadId, item)
     local unitsInSquad = gv_Squads[squadId].units
-    local firstUnit = gv_UnitData[unitsInSquad[1]]
-    return firstUnit
+    for i = 1, #unitsInSquad do
+        local unit = gv_UnitData[unitsInSquad[i]]
+        local freeSpace = unit:FindEmptyPosition(GetContainerInventorySlotName(unit), item)
+        if freeSpace then
+            return unit
+        end
+    end
 end

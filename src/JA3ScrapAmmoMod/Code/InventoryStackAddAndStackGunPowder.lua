@@ -2,6 +2,7 @@ function Inventory:AddAndStackGunPowder(item)
     MergeStackIntoContainer(self, "Inventory", item)
     if item.Amount > item.MaxStacks then
         local newItem = PlaceInventoryItem("BlackPowder")
+
         newItem.Amount = newItem.MaxStacks
         self:AddItem("Inventory", newItem)
         ObjModified(newItem)
