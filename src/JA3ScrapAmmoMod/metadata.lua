@@ -4,8 +4,8 @@ return PlaceObj('ModDef', {
 	'id', "JA3ScrapAmmoMod",
 	'content_path', "Mod/JA3ScrapAmmoMod/",
 	'author', "thej33per",
-	'version_minor', 0,
-	'version', 50,
+	'version_minor', 1,
+	'version', 0,
 	'lua_revision', 233360,
 	'saved_with_revision', 338408,
 	'code', {
