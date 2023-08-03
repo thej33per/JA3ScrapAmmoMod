@@ -1,7 +1,6 @@
 if Ammo then
     Ammo.GetScrapParts = function(self)
         if self.class and InventoryItemDefs[self.class] then
-			print("Class: ", self.class)
             return (InventoryItemDefs[self.class]:GetProperty("ScrapParts") or 0)
         end
 
@@ -12,7 +11,6 @@ if Ammo then
 
     Ammo.GetGunPowder = function(self)
         if self.class and InventoryItemDefs[self.class] then
-			print("Class: ", self.class)
             return (InventoryItemDefs[self.class]:GetProperty("GunPowder") or 0)
         end
 

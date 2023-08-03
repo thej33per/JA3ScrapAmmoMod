@@ -1,21 +1,17 @@
 function AmmoSetScrap(className, partsNum)
     if _G[className] then
-		print("Class: ", className)
         _G[className].ScrapParts = partsNum
     end
     if InventoryItemDefs[className] then
-		print("Class: ", className)
         InventoryItemDefs[className].ScrapParts = partsNum
     end
 end
 
 function AmmoSetGunPowder(className, gunpowderNum)
     if _G[className] then
-		print("Class: ", className)
         _G[className].GunPowder = gunpowderNum
     end
     if InventoryItemDefs[className] then
-		print("Class: ", className)
         InventoryItemDefs[className].GunPowder = gunpowderNum
     end
 end

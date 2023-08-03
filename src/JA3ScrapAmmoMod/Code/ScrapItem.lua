@@ -4,13 +4,10 @@ function ScrapItem(inventory, slot_name, item, squadBag, squadId)
     if inventory:IsEmpty("Inventory") then
         inventory = GetFirstUnitWithInventorySpaceFromSquad(squadId, item)
         squadBag = GetSquadBagInventory(squadId)
-        --print("firstUnitFromSquad: ", firstUnitFromSquad)
     end
     if IsKindOf(item, "Firearm") then
         additional = item:GetSpecialScrapItems()
     end
-    print("inventory: ", inventory)
-    print("squadbag: ", squadBag)
     if next(additional) then
         local units = gv_Squads[squadId].units
         local unit_id = table.max(units, function(unit_id)
