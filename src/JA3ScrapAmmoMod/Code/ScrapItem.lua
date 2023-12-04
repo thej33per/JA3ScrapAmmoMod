@@ -55,15 +55,19 @@ function ScrapItem(inventory, slot_name, item, amount, squadBag, squadId)
     end
     if isAmmo then
         local scrapedAmmo = 30 * partsAmount / item:GetScrapParts()
-        mylog("INFO: scrapedAmmo = " .. scrapedAmmo)
-        local remainingAmmoAmount = item.Amount - scrapedAmmo
+        if scrapedAmmo > 0 then
+            mylog("INFO: scrapedAmmo = " .. scrapedAmmo)
+            local remainingAmmoAmount = item.Amount - scrapedAmmo
             item.Amount = remainingAmmoAmount
-        if item.Amount >= 0 then
-            local removedItem, pos = inventory:RemoveItem(slot_name, item)
-            DoneObject(removedItem)
-            if item.Amount > 0 then
+            if remainingAmmoAmount > 0 then
                 AddAndStackItem(item)
+            else
+                mylog("DEBUG: remainingAmmoAmount= 0 -> removing ammo stack")
+                local removedItem, pos = inventory:RemoveItem(slot_name, item)
+                DoneObject(removedItem)
             end
+        else
+            mylog("DEBUG: scrapedAmmo = 0, abort scrapping")
         end
     else
         if is_stack then
