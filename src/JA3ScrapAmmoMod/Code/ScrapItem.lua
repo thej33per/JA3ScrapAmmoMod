@@ -1,5 +1,18 @@
-function ScrapItem(inventory, slot_name, item, squadBag, squadId)
-    local partsAmount = item:AmountOfScrapPartsFromItem()
+-- override function ScrapItem in Lua\Inventory.lua declaration
+
+function ScrapItem(inventory, slot_name, item, amount, squadBag, squadId)
+    local is_stack = IsKindOf(item, "InventoryStack")
+    local isAmmo = IsKindOf(item, "Ammo")
+    if is_stack then
+        amount = amount and Min(amount, item.Amount) or item.Amount
+    end
+    amount = amount or 1
+    local partsAmount = 0
+    if isAmmo then
+        partsAmount = item:AmountOfScrapPartsFromItem()
+    else
+        partsAmount = item:AmountOfScrapPartsFromItem() * amount
+    end
     local additional
     if inventory:IsEmpty("Inventory") then
         inventory = GetFirstUnitWithInventorySpaceFromSquad(squadId, item)
@@ -19,13 +32,14 @@ function ScrapItem(inventory, slot_name, item, squadBag, squadId)
         if max_mech > rand then
             local res_idx = 1 + rnd_unit:Random(#additional)
             local res = additional[res_idx]
-            local item = PlaceInventoryItem(res.restype)
-            if IsKindOf(item, "InventoryStack") then
-                item.Amount = res.amount
+            local res_item = PlaceInventoryItem(res.restype)
+            if IsKindOf(res_item, "InventoryStack") then
+                res_item.Amount = res.amount
             end
-            inventory:AddItem("Inventory", item)
+            local add_slot_name = GetContainerInventorySlotName(inventory)
+            inventory:AddItem(add_slot_name, res_item)
         end
-    elseif IsKindOf(item, "Ammo") then
+    elseif isAmmo then
         local amountGunPowder = item:AmountGunPowderFromAmmo()
         local gunPowder = PlaceInventoryItem("BlackPowder")
         gunPowder.Amount = amountGunPowder
@@ -39,20 +53,26 @@ function ScrapItem(inventory, slot_name, item, squadBag, squadId)
         parts.Amount = partsAmount
         squadBag:AddAndStackItem(parts)
     end
-    if IsKindOf(item, "Ammo") then
+    if isAmmo then
         local scrapedAmmo = 30 * partsAmount / item:GetScrapParts()
+        mylog("INFO: scrapedAmmo = " .. scrapedAmmo)
         local remainingAmmoAmount = item.Amount - scrapedAmmo
-        if remainingAmmoAmount > 0 then
             item.Amount = remainingAmmoAmount
-            ObjModified(item)
-            DoneObject(item)
-        else
+        if item.Amount >= 0 then
+            local removedItem, pos = inventory:RemoveItem(slot_name, item)
+            DoneObject(removedItem)
+            if item.Amount > 0 then
+                AddAndStackItem(item)
+            end
+        end
+    else
+        if is_stack then
+            item.Amount = Max(0, item.Amount - amount)
+        end
+        if not is_stack or item.Amount == 0 then
             local removedItem, pos = inventory:RemoveItem(slot_name, item)
             DoneObject(removedItem)
         end
-    else
-        local removedItem, pos = inventory:RemoveItem(slot_name, item)
-        DoneObject(removedItem)
     end
     if IsKindOf(inventory, "Unit") and slot_name == inventory.current_weapon and inventory:IsIdleCommand() then
         inventory:SetCommand("Idle")

@@ -1,8 +1,14 @@
 UndefineClass("Ammo")
+
+-- override Ammo-Class in Lua\Inventory.lua declaration
+
 DefineClass.Ammo = {
     __parents = {
         "SquadBagItem",
-        "AmmoProperties"
+        "AmmoProperties",
+        "BobbyRayShopAmmoProperties",
+        "ScrapableItem"
+
 
     },
     properties = {

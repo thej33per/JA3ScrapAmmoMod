@@ -13,3 +13,13 @@ function Inventory:AddAndStackGunPowder(item)
         ObjModified(item)
     end
 end
+
+function Inventory:AddAndStackItem(item)
+    MergeStackIntoContainer(self, "Inventory", item)
+    if item.Amount > 0 then
+        self:AddItem("Inventory", item)
+        ObjModified(item)
+    else
+        DoneObject(item)
+    end
+end
