@@ -10,9 +10,18 @@ local options = CurrentModOptions or {}
 function OnMsg.ApplyModOptions()
     options = CurrentModOptions
 end
+
+local function getNumberFromModOptionChoice(option)
+    if option ~= nil and option ~= "" then
+        local choice = option
+        local newchoice = string.sub(choice, 1, 1)
+        return tonumber(newchoice)
+    end
+end
+
 local function mylogL(msg, level)
     if logEnabled then
-        if tonumber(options.sam_LogLevel)>= level then
+        if getNumberFromModOptionChoice(options.sam_LogLevel) >= level then
             if logToConsole then
                 print("<JA3SAM> " .. msg)
             end

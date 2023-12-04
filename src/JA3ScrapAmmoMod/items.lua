@@ -35,13 +35,13 @@ PlaceObj('ModItemOptionChoice', {
 	'name', "sam_LogLevel",
 	'comment', "0 = off / errors only, 1 = minimal, 2 = info, 3 = debug",
 	'DisplayName', "Log Level",
-	'Help', "0 = off / errors only, 1 = minimal, 2 = info, 3 = debug",
+	'Help', "Set the amount of logging with this option",
 	'DefaultValue', "0",
 	'ChoiceList', {
-		"0",
-		"1",
-		"2",
-		"3",
+		"0 (off / errors only)",
+		"1 (minimal)",
+		"2 (info)",
+		"3 (debug)",
 	},
 }),
 PlaceObj('ModItemOptionChoice', {
