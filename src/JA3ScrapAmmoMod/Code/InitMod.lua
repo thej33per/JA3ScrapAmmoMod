@@ -6,16 +6,13 @@ local logEnabled = false
 local logToConsole = true
 local logToSnype = true
 
-ScrapPerNormalAmmo = 2 --default
-ScrapPerAPAmmo = 4 --default
-GunPowderPerNormalAmmo = 1 --default
-GunPowderPerAPAmmo = 1 --default
-
-logLevel = 0 -- 0 = off / errors only, 1 = warning, 2 = info, 3 = debug
-
+local options = CurrentModOptions or {}
+function OnMsg.ApplyModOptions()
+    options = CurrentModOptions
+end
 local function mylogL(msg, level)
     if logEnabled then
-        if logLevel >= level then
+        if tonumber(options.sam_LogLevel)>= level then
             if logToConsole then
                 print("<JA3SAM> " .. msg)
             end
@@ -38,14 +35,6 @@ function mylog(msg)
     mylogL(msg, level)
 end
 
-local function getNumberFromModItemOptionChoice(optionName)
-    if CurrentModOptions[optionName] ~= nil and CurrentModOptions[optionName] ~= "" then
-        local choice = CurrentModOptions[optionName]
-        local newchoice = string.sub(choice, 1, 1)
-        return tonumber(newchoice)
-    end
-end
-
 local function toBoolean(str)
     if str == true or str == "true" then
         return true
@@ -55,40 +44,36 @@ end
 
 local function InitJA3ScrapAmmoMod()
     print("INFO: " .. modName .. " [v" .. modVersion .. "] mod enabled")
-    if (CurrentModOptions["Logging"] ~= nil) then
-        logEnabled = toBoolean(CurrentModOptions["Logging"])
+    if (options.sam_Logging ~= nil) then
+        logEnabled = toBoolean(options.sam_Logging)
     else
         print("ERROR: Logging is nil")
     end
-    if CurrentModOptions["LogLevel"] ~= nil and CurrentModOptions["LogLevel"] ~= "" then
-        logLevel = tonumber(CurrentModOptions["LogLevel"])
+    if options.sam_LogLevel ~= nil and options.sam_LogLevel ~= "" then
+        logLevel = tonumber(options.sam_LogLevel)
     else
         print("WARNING: LogLevel is empty, using default")
     end
     mylogL("INFO: logging enabled, logLevel: " .. logLevel, 0)
-    if CurrentModOptions["ScrapPerNormalAmmo"] ~= nil and CurrentModOptions["ScrapPerNormalAmmo"] ~= "" then
-        ScrapPerNormalAmmo = getNumberFromModItemOptionChoice("ScrapPerNormalAmmo")
-        mylog("INFO: option ScrapPerNormalAmmo: " .. tostring(ScrapPerNormalAmmo))
+    if options.sam_ScrapPerNormalAmmo ~= nil and options.sam_ScrapPerNormalAmmo ~= "" then
+        mylog("INFO: option ScrapPerNormalAmmo: " .. tostring(options.sam_ScrapPerNormalAmmo))
     else
-        mylog("WARNING: fallback to default ScrapPerNormalAmmo: " .. tostring(ScrapPerNormalAmmo))
+        mylog("WARNING: fallback to default ScrapPerNormalAmmo: " .. tostring(options.sam_ScrapPerNormalAmmo))
     end
-    if CurrentModOptions["ScrapPerAPAmmo"] ~= nil and CurrentModOptions["ScrapPerAPAmmo"] ~= ""  then
-        ScrapPerAPAmmo = getNumberFromModItemOptionChoice("ScrapPerAPAmmo")
-        mylog("INFO: option ScrapPerAPAmmo: " .. tostring(ScrapPerAPAmmo))
+    if options.sam_ScrapPerAPAmmo ~= nil and options.sam_ScrapPerAPAmmo ~= ""  then
+        mylog("INFO: option ScrapPerAPAmmo: " .. tostring(options.sam_ScrapPerAPAmmo))
     else
-        mylog("WARNING: fallback to default ScrapPerAPAmmo: " .. tostring(ScrapPerAPAmmo))
+        mylog("WARNING: fallback to default ScrapPerAPAmmo: " .. tostring(options.sam_ScrapPerAPAmmo))
     end
-    if CurrentModOptions["GunPowderPerNormalAmmo"] ~= nil and CurrentModOptions["GunPowderPerNormalAmmo"] ~= "" then
-        GunPowderPerNormalAmmo = getNumberFromModItemOptionChoice("GunPowderPerNormalAmmo")
-        mylog("INFO: option GunPowderPerNormalAmmo: " .. tostring(GunPowderPerNormalAmmo))
+    if options.sam_GunPowderPerNormalAmmo ~= nil and options.sam_GunPowderPerNormalAmmo ~= "" then
+        mylog("INFO: option GunPowderPerNormalAmmo: " .. tostring(options.sam_GunPowderPerNormalAmmo))
     else
-        mylog("WARNING: fallback to default GunPowderPerNormalAmmo: " .. tostring(GunPowderPerNormalAmmo))
+        mylog("WARNING: fallback to default GunPowderPerNormalAmmo: " .. tostring(sam_GunPowderPerNormalAmmo))
     end
-    if CurrentModOptions["GunPowderPerAPAmmo"] ~= nil and CurrentModOptions["GunPowderPerAPAmmo"] ~= "" then
-        GunPowderPerAPAmmo = getNumberFromModItemOptionChoice("GunPowderPerAPAmmo")
-        mylog("INFO: option GunPowderPerAPAmmo: " .. tostring(GunPowderPerAPAmmo))
+    if options.sam_GunPowderPerAPAmmo ~= nil and options.sam_GunPowderPerAPAmmo ~= "" then
+        mylog("INFO: option GunPowderPerAPAmmo: " .. tostring(options.sam_GunPowderPerAPAmmo))
     else
-        mylog("WARNING: fallback to default GunPowderPerAPAmmo: " .. tostring(GunPowderPerAPAmmo))
+        mylog("WARNING: fallback to default GunPowderPerAPAmmo: " .. tostring(options.sam_GunPowderPerAPAmmo))
     end
 end
 

@@ -32,7 +32,7 @@ PlaceObj('ModItemCode', {
 	'CodeFileName', "Code/ScrapItem.lua",
 }),
 PlaceObj('ModItemOptionChoice', {
-	'name', "LogLevel",
+	'name', "sam_LogLevel",
 	'comment', "0 = off / errors only, 1 = minimal, 2 = info, 3 = debug",
 	'DisplayName', "Log Level",
 	'Help', "0 = off / errors only, 1 = minimal, 2 = info, 3 = debug",
@@ -45,7 +45,7 @@ PlaceObj('ModItemOptionChoice', {
 	},
 }),
 PlaceObj('ModItemOptionChoice', {
-	'name', "GunPowderPerAPAmmo",
+	'name', "sam_GunPowderPerAPAmmo",
 	'comment', "Gunpowder per 30 AP ammo",
 	'DisplayName', "GunPowder per 30 AP ammo",
 	'Help', "Defines the amount of gunpowder you get per 30 AP ammo.",
@@ -64,7 +64,7 @@ PlaceObj('ModItemOptionChoice', {
 	},
 }),
 PlaceObj('ModItemOptionChoice', {
-		'name', "GunPowderPerNormalAmmo",
+		'name', "sam_GunPowderPerNormalAmmo",
 		'comment', "Gunpowder per 30 normal ammo",
 		'DisplayName', "GunPowder per 30 normal ammo",
 		'Help', "Defines the amount of gunpowder you get per 30 normal ammo.",
@@ -83,7 +83,7 @@ PlaceObj('ModItemOptionChoice', {
 		},
 	}),
 PlaceObj('ModItemOptionChoice', {
-	'name', "ScrapPerAPAmmo",
+	'name', "sam_ScrapPerAPAmmo",
 	'comment', "Scrap per 30 ap ammo",
 	'DisplayName', "Scrap per 30 AP ammo",
 	'Help', "Defines the amount of scrap you get per 30 AP ammo.",
@@ -102,7 +102,7 @@ PlaceObj('ModItemOptionChoice', {
 	},
 }),
 PlaceObj('ModItemOptionChoice', {
-	'name', "ScrapPerNormalAmmo",
+	'name', "sam_ScrapPerNormalAmmo",
 	'comment', "Scrap per 30 normal ammo",
 	'DisplayName', "Scrap per 30 normal ammo",
 	'Help', "Defines the amount of scrap you get per 30 normal ammo.",
@@ -121,7 +121,7 @@ PlaceObj('ModItemOptionChoice', {
 	},
 }),
 PlaceObj('ModItemOptionToggle', {
-	'name', "Logging",
+	'name', "sam_Logging",
 	'DisplayName', "Enable Logging",
 	'Help', "Turn on to enable logging from mod",
 }),
