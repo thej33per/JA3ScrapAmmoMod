@@ -40,6 +40,8 @@ function mylog(msg)
         level = 1
     elseif string.find(tostring(msg), "INFO") ~= nil then
         level = 2
+    elseif string.find(tostring(msg), "DEBUG") ~= nil then
+        level = 3
     end
     mylogL(msg, level)
 end
@@ -49,6 +51,52 @@ local function toBoolean(str)
         return true
     end
     return false
+end
+
+local dlg = GetInGameInterfaceModeDlg()
+local partyUi = dlg and dlg.idParty
+if partyUi then
+    partyUi:RespawnContent()
+end
+local weaponUi = dlg and dlg:ResolveId("idWeaponUI")
+if weaponUi then
+    weaponUi:RespawnContent()
+end
+
+local function findParentXtByTextId(obj, id)
+    if obj.Text and TGetID(obj.Text) == id then
+        return obj, true
+    end
+    for _, sub in ipairs(obj) do
+        local match, isDirect = findParentXtByTextId(sub, id)
+        if isDirect and match then
+            return obj, false
+        end
+        if match then
+            return match, false
+        end
+    end
+end
+
+local function remove_scrapAllContextMenu()
+    mylog('DEBUG: remove scrapAll button in context menu in inventory')
+    local xt = findParentXtByTextId(XTemplates.InventoryContextMenu, 522902019009)
+    if not xt then
+        mylog("DEBUG: scrapAll XTemplate dont exists. skip removing")
+        return
+    end
+
+    mylog("DEBUG: found parent XTemplate: " .. tostring(xt))
+
+    local removeXtFn = function()
+        for i, p in ipairs(xt) do
+            if p.Id == 'scrapall' then
+                table.remove(xt, i)
+                break
+            end
+        end
+    end
+    removeXtFn()
 end
 
 local function InitJA3ScrapAmmoMod()
@@ -85,48 +133,9 @@ local function InitJA3ScrapAmmoMod()
         mylog("WARNING: fallback to default GunPowderPerAPAmmo: " .. tostring(options.sam_GunPowderPerAPAmmo))
     end
 
-    apply = deactivate_scrapAllContextMenu()
+    apply = remove_scrapAllContextMenu()
 
-    local dlg = GetInGameInterfaceModeDlg()
-    local partyUi = dlg and dlg.idParty
-    if partyUi then
-        partyUi:RespawnContent()
-    end
-    local weaponUi = dlg and dlg:ResolveId("idWeaponUI")
-    if weaponUi then
-        weaponUi:RespawnContent()
-    end
 end
-
-local function findXtByTextId(obj, id)
-    if obj.Text and TGetID(obj.Text) == id then
-        return obj
-    end
-    for _, sub in ipairs(obj) do
-        local match = findXtByTextId(sub, id)
-        if match then
-            return match
-        end
-    end
-end
-
-function deactivate_scrapAllContextMenu()
-    mylog("DEBUG: deactivate scrapAll button in context menu for ammo in inventory")
-    local xt = findXtByTextId(XTemplates.InventoryContextMenu, 522902019009)
-    if not xt then
-        mylog("DEBUG: XTemplate nicht gefunden")
-        return
-    end
-    mylog("DEBUG: found parent XTemplate: " .. tostring(xt))
-    xt:SetProperty("ContextUpdateOnOpen", true)
-    xt:SetProperty("OnContextUpdate", function(self, context, ...)
-            print("DEBUG: found XTemplate: " .. self)
-            self.setProperty("__condition", print("DEBUG: XTemplate overridden") and context and InventoryIsContainerOnSameSector(context) and context.item and not IsKindOf(context.item, "Ammo") and context.item.ScrapParts and context.item.ScrapParts > 0 and context.item.object_class ~= "Medicine"and IsKindOf(context.item, "InventoryStack") and context.item.Amount > 1 and context.item.ScrapParts)
-            return XContextControl.OnContextUpdate(self, context)
-        end
-    )
-end
-
-
 
 OnMsg.ModsReloaded = InitJA3ScrapAmmoMod
+
