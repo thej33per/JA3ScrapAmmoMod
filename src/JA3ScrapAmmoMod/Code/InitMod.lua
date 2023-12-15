@@ -63,7 +63,7 @@ local function InitJA3ScrapAmmoMod()
     else
         print("WARNING: LogLevel is empty, using default")
     end
-    mylogL("INFO: logging enabled, logLevel: " .. logLevel, 0)
+    mylogL("INFO: logging enabled, logLevel: " .. options.sam_LogLevel, 0)
     if options.sam_ScrapPerNormalAmmo ~= nil and options.sam_ScrapPerNormalAmmo ~= "" then
         mylog("INFO: option ScrapPerNormalAmmo: " .. tostring(options.sam_ScrapPerNormalAmmo))
     else
