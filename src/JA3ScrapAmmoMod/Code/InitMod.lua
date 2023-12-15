@@ -84,6 +84,49 @@ local function InitJA3ScrapAmmoMod()
     else
         mylog("WARNING: fallback to default GunPowderPerAPAmmo: " .. tostring(options.sam_GunPowderPerAPAmmo))
     end
+
+    apply = deactivate_scrapAllContextMenu()
+
+    local dlg = GetInGameInterfaceModeDlg()
+    local partyUi = dlg and dlg.idParty
+    if partyUi then
+        partyUi:RespawnContent()
+    end
+    local weaponUi = dlg and dlg:ResolveId("idWeaponUI")
+    if weaponUi then
+        weaponUi:RespawnContent()
+    end
 end
+
+local function findXtByTextId(obj, id)
+    if obj.Text and TGetID(obj.Text) == id then
+        return obj
+    end
+    for _, sub in ipairs(obj) do
+        local match = findXtByTextId(sub, id)
+        if match then
+            return match
+        end
+    end
+end
+
+function deactivate_scrapAllContextMenu()
+    mylog("DEBUG: deactivate scrapAll button in context menu for ammo in inventory")
+    local xt = findXtByTextId(XTemplates.InventoryContextMenu, 522902019009)
+    if not xt then
+        mylog("DEBUG: XTemplate nicht gefunden")
+        return
+    end
+    mylog("DEBUG: found parent XTemplate: " .. tostring(xt))
+    xt:SetProperty("ContextUpdateOnOpen", true)
+    xt:SetProperty("OnContextUpdate", function(self, context, ...)
+            print("DEBUG: found XTemplate: " .. self)
+            self.setProperty("__condition", print("DEBUG: XTemplate overridden") and context and InventoryIsContainerOnSameSector(context) and context.item and not IsKindOf(context.item, "Ammo") and context.item.ScrapParts and context.item.ScrapParts > 0 and context.item.object_class ~= "Medicine"and IsKindOf(context.item, "InventoryStack") and context.item.Amount > 1 and context.item.ScrapParts)
+            return XContextControl.OnContextUpdate(self, context)
+        end
+    )
+end
+
+
 
 OnMsg.ModsReloaded = InitJA3ScrapAmmoMod
