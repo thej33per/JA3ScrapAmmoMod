@@ -18,6 +18,9 @@ function ScrapItem(inventory, slot_name, item, amount, squadBag, squadId)
         inventory = GetFirstUnitWithInventorySpaceFromSquad(squadId, item)
         squadBag = GetSquadBagInventory(squadId)
     end
+    if IsKindOf(inventory, "SectorStash") then
+        squadBag = inventory
+    end
     if IsKindOf(item, "Firearm") then
         additional = item:GetSpecialScrapItems()
     end
@@ -59,8 +62,8 @@ function ScrapItem(inventory, slot_name, item, amount, squadBag, squadId)
             mylog("INFO: scrapedAmmo = " .. scrapedAmmo)
             local remainingAmmoAmount = item.Amount - scrapedAmmo
             item.Amount = remainingAmmoAmount
-            if remainingAmmoAmount > 0 then
-                AddAndStackItem(item)
+            if item.Amount > 0 then
+                ObjModified(item)
             else
                 mylog("DEBUG: remainingAmmoAmount= 0 -> removing ammo stack")
                 local removedItem, pos = inventory:RemoveItem(slot_name, item)
