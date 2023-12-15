@@ -18,6 +18,9 @@ function ScrapItem(inventory, slot_name, item, amount, squadBag, squadId)
         inventory = GetFirstUnitWithInventorySpaceFromSquad(squadId, item)
         squadBag = GetSquadBagInventory(squadId)
     end
+    if IsKindOf(inventory, "SectorStash") then
+        squadBag = inventory
+    end
     if IsKindOf(item, "Firearm") then
         additional = item:GetSpecialScrapItems()
     end
