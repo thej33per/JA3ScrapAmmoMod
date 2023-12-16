@@ -9,7 +9,12 @@ function ScrapItem(inventory, slot_name, item, amount, squadBag, squadId)
     amount = amount or 1
     local partsAmount = 0
     if isAmmo then
-        partsAmount = item:AmountOfScrapPartsFromItem()
+        if amount == 1 then
+            partsAmount = item:GetScrapParts()
+        else
+            partsAmount = item:AmountOfScrapPartsFromItem()
+        end
+
     else
         partsAmount = item:AmountOfScrapPartsFromItem() * amount
     end
@@ -43,7 +48,12 @@ function ScrapItem(inventory, slot_name, item, amount, squadBag, squadId)
             inventory:AddItem(add_slot_name, res_item)
         end
     elseif isAmmo then
-        local amountGunPowder = item:AmountGunPowderFromAmmo()
+        local amountGunPowder = 1
+        if amount == 1 then
+            item:GetGunPowder()
+        else
+            amountGunPowder = item:AmountGunPowderFromAmmo()
+        end
         local gunPowder = PlaceInventoryItem("BlackPowder")
         gunPowder.Amount = amountGunPowder
         inventory:AddAndStackGunPowder(gunPowder)
